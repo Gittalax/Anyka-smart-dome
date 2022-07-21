@@ -23,6 +23,9 @@ If you disable Wifi on your phone you will notice that you still have access to 
 
 My attempt here is to harden the device and make it usable without the companion app, and stop it from retransmitting the video feed outside of my local network. The most basic requirement is to get RTSP/RTP running, or an mjpeg server.
 
+The next important thing would be the pan-, tilt-, and LEDs control, and then the motion tracking, so on with the all whistles and bells ;)
+
+
 ### RTSP Server
 
 Devices that was built using the Anyka SDK usually already contains a simple RTSP server, `/usr/bin/ak_rtsp_demo`. Unfortunately it doesn't provide any form of authentication. The main process, anyka_ipc, can also be built to include an RTSP server by settings `CONFIG_RTSP_SUPPORT = y` when building from the SDK.
