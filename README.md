@@ -21,7 +21,7 @@ If you disable Wifi on your phone you will notice that you still have access to 
 
 ## About this repo ## 
 
-My atempt here is to harden the device and make it usable without the companion app, and stop it from retransmitting the video feed outside of my local network. The most basic requirement is to get RTSP/RTP running, or an mjpeg server.
+My attempt here is to harden the device and make it usable without the companion app, and stop it from retransmitting the video feed outside of my local network. The most basic requirement is to get RTSP/RTP running, or an mjpeg server.
 
 ### RTSP Server
 
