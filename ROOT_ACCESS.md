@@ -5,6 +5,16 @@ Getting root access is pretty straight forward for this specific device. All you
 Copy this line into your product_test file:
     echo 'root:$1$ouLOV500$R5LCUppbxY40r9uLE8la61:0:0:99999:7:::' > /etc/shadow
 
+
+- This is not working with the smart cam, since the invocation of this stuff is commented out in the /usr/sbin/servcie.sh, and it have a 
+ 'killall -9 telnetd' line.
+ So I had to looking for another way. 
+ Anyway, the ftp server is running and we can logon with the default root:12345678 account(!!).
+ There are a security hole named /etc/jffs2/time_zone.sh. It called by the anyka_ipc.sh...
+ So appending the 'telnetd &' line to the end of that file, the telnet daemon will run again, with root permissions, WITHOUT asking password(!!).
+-
+
+
 ## Explanation ##
 
 Part of the boot process runs a bash script called /usr/sbin/servcie.sh. This script is responsible for starting the watchdog-servcie and main application "anyka_ipc". But the interesing part is this:
@@ -45,6 +55,4 @@ So running the command `echo 'root:$1$ouLOV500$R5LCUppbxY40r9uLE8la61:0:0:99999:
     Password: password
     welcome to file system
     [root@anyka ~]$
-
-
 
