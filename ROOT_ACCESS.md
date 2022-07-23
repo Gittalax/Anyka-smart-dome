@@ -12,13 +12,15 @@ Copy this line into your product_test file:
  Anyway, the ftp server is running and we can logon with the default root:12345678 account(!!).
  There are a security hole named /etc/jffs2/time_zone.sh. It called by the anyka_ipc.sh...
  So appending the 'telnetd &' line to the end of that file, the telnet daemon will run again, with root permissions, WITHOUT asking password(!!).
+ After logged in, change the root password ``` $ passwd ``` immediately. It will be asked at login from now.
+ 
 -
 
 
 ## Explanation ##
 
 Part of the boot process runs a bash script called /usr/sbin/servcie.sh. This script is responsible for starting the watchdog-servcie and main application "anyka_ipc". But the interesing part is this:
-
+```
     if test -d /mnt/usbnet ;then
     	FACTORY_TEST=1
     else
@@ -38,14 +40,14 @@ Part of the boot process runs a bash script called /usr/sbin/servcie.sh. This sc
                  /mnt/usbnet/product_test &
     ....
     fi
-
+```
 
 This checks the SD card for a folder named usbnet, and if this folder exists it tries to execute the file product_test.
 
 This is our entrypoint as this allows us torun arbitrary commands as root during boot.
 
 So running the command `echo 'root:$1$ouLOV500$R5LCUppbxY40r9uLE8la61:0:0:99999:7:::' > /etc/shadow` replaces the existing password for the root account and you can now login to the device via Telnet with the username root and the password "password".
-
+```
     $ telnet 192.168.1.57
     Trying 192.168.1.57...
     Connected to anyka.
@@ -56,3 +58,4 @@ So running the command `echo 'root:$1$ouLOV500$R5LCUppbxY40r9uLE8la61:0:0:99999:
     welcome to file system
     [root@anyka ~]$
 
+```
